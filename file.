@@ -1,0 +1,65 @@
+import { Box, Flex, Text, Input, Button, VStack, HStack, Avatar, Divider, IconButton, useColorMode, useColorModeValue, Container } from "@chakra-ui/react";
+import { FaHome, FaHashtag, FaBell, FaEnvelope, FaRegBookmark, FaListAlt, FaUserAlt, FaMehBlank, FaFeatherAlt, FaRegComment, FaRetweet, FaHeart, FaShareSquare } from "react-icons/fa";
+
+const Tweet = ({ avatar, username, content }) => {
+  return (
+    <HStack spacing={4} paddingY={3}>
+      <Avatar src={avatar} />
+      <VStack align="start" spacing={1}>
+        <Text fontWeight="bold">{username}</Text>
+        <Text>{content}</Text>
+        <HStack fontSize="sm" spacing={4} color="gray.500">
+          <Button leftIcon={<FaRegComment />} variant="ghost" size="sm">
+            5
+          </Button>
+          <Button leftIcon={<FaRetweet />} variant="ghost" size="sm">
+            2
+          </Button>
+          <Button leftIcon={<FaHeart />} variant="ghost" size="sm">
+            12
+          </Button>
+          <IconButton icon={<FaShareSquare />} variant="ghost" size="sm" />
+        </HStack>
+      </VStack>
+    </HStack>
+  );
+};
+
+const Index = () => {
+  const { toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("gray.100", "gray.700");
+  const color = useColorModeValue("black", "white");
+
+  return (
+    <Container maxW="container.md" p={0}>
+      <Flex direction="column" height="100vh" bg={bg} color={color}>
+        <Flex padding={4} borderBottom="1px" borderColor="gray.200" align="center" justify="space-between">
+          <HStack spacing={6}>
+            <IconButton icon={<FaHome />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaHashtag />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaBell />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaEnvelope />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaRegBookmark />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaListAlt />} fontSize="xl" variant="ghost" />
+            <IconButton icon={<FaUserAlt />} fontSize="xl" variant="ghost" />
+          </HStack>
+          <IconButton icon={<FaMehBlank />} onClick={toggleColorMode} />
+        </Flex>
+        <Flex flex={1} overflowY="auto" direction="column" p={4}>
+          <Input placeholder="What's happening?" mb={4} />
+          <Button leftIcon={<FaFeatherAlt />} colorScheme="blue" mb={4}>
+            Tweet
+          </Button>
+          <Divider mb={4} />
+          <VStack spacing={0} divider={<Divider />}>
+            <Tweet avatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx1c2VyJTIwYXZhdGFyfGVufDB8fHx8MTcxMjM4MzU2Mnww&ixlib=rb-4.0.3&q=80&w=1080" username="john_doe" content="Just setting up my twttr clone!" />
+            <Tweet avatar="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwyfHx1c2VyJTIwYXZhdGFyfGVufDB8fHx8MTcxMjM4MzU2Mnww&ixlib=rb-4.0.3&q=80&w=1080" username="jane_smith" content="Hello world, this is my first tweet!" />
+            {/* More tweets can be added here */}
+          </VStack>
+        </Flex>
+      </Flex>
+    </Container>
+  );
+};
+
+export default Index;
